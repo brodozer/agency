@@ -1,0 +1,56 @@
+@mixin fonts ($ff, $fw, $fz, $fc) {
+	font: {
+		family: $ff, Helvetica, Arial, sans-serif;
+		weight: $fw;
+		size: $fz+px;
+	}
+	color: $fc;
+}
+
+@mixin position ($mw, $top, $right) {
+	max-width: $mw+px;
+	top: $top+px;
+	right: $right+px;
+}
+
+@mixin xs {
+	@media (max-width: $xs) {
+		@content;
+	}
+}
+
+@mixin sm {
+	@media (max-width: $sm) {
+		@content;
+	}
+}
+
+@mixin md {
+	@media (max-width: $md) {
+		@content;
+	}
+}
+
+@mixin lg {
+	@media (max-width: $lg) {
+		@content;
+	}
+}
+
+@mixin xl {
+	@media (max-width: $xl) {
+		@content;
+	}
+}
+
+@mixin xxl {
+	@media (max-width: $xxl) {
+		@content;
+	}
+}
+
+
+
+
+
+

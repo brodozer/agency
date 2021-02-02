@@ -1,0 +1,37 @@
+@font-face {
+	font-family: 'Lato_Black';
+	src: url('../fonts/Lato-Black.eot');
+	src: local('☺'), url('../fonts/Lato-Black.woff') format('woff'), url('../fonts/Lato-Black.ttf') format('truetype'), url('../fonts/Lato-Black.svg') format('svg');
+	font-weight: 800;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Lato_Bold';
+	src: url('../fonts/Lato-Bold.eot');
+	src: local('☺'), url('../fonts/Lato-Bold.woff') format('woff'), url('../fonts/Lato-Bold.ttf') format('truetype'), url('../fonts/Lato-Bold.svg') format('svg');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Lemon_Milk_Bold';
+	src: url('../fonts/LemonMilkBold-gx2B3.eot');
+	src: local('☺'), url('../fonts/LemonMilkBold-gx2B3.woff') format('woff'), url('../fonts/LemonMilkBold-gx2B3.ttf') format('truetype'), url('../fonts/LemonMilkBold-gx2B3.svg') format('svg');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Peace_Sans';
+	src: url('../fonts/peace_sans.eot');
+	src: local('☺'), url('../fonts/peace_sans.woff') format('woff'), url('../fonts/peace_sans.ttf') format('truetype'), url('../fonts/peace_sans.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+//font-family: 'Open Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;0,800;1,400&display=swap');

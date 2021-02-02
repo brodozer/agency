@@ -1,0 +1,32 @@
+
+//bootstrap
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1260px,
+) !default;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1232px
+) !default;
+
+$xs: 320px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1260px;
+$xxl: 1400px;
+
+//fonts:
+$lato_black: 'Lato_Black';
+$lato_bold: 'Lato_Bold';
+$lemon_milk: 'Lemon_Milk_Bold';
+$peace_sans: 'Peace_Sans';
+$open_sans: 'Open Sans';
+
+
