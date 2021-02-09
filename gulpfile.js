@@ -46,6 +46,7 @@ let path = {
 		html:  source + '/*.html',
 		js:    source + '/js/main.js',
 		scss:  source + '/scss/style.scss',
+		css:   source + '/css/*.css',
 		img:   source + '/img/**/*.*',
 		fonts: source + '/fonts/**/*.*'
 	},
@@ -95,18 +96,25 @@ function js() {
 		.pipe(sourcemaps.init())
 		.pipe(uglify())
 		.pipe(sourcemaps.write('.'))
-		.pipe(dest(path.prod.js))
+		.pipe(rename(function(path) {
+         if (!path.extname.endsWith('.map')) {
+             path.basename += '.min';
+         }
+      }))
+		.pipe(dest(path.app.js))
+		.pipe(browserSync.stream())
 }
 
 // js libs
 function jsLibs() {
 	return gulp.src([ 
-		source + '/libs/jquery/jquery.min.js',
-		source + 'src/libs/'
+		//source + '/libs/jquery/jquery.min.js',
+		source + '/libs/swiper/swiper.min.js'
 		])
-		.pipe(concat('libs.min.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest(path.app.js));
+		//.pipe(concat('libs.min.js'))
+		.pipe(rename("libs.min.js"))
+		//.pipe(uglify())
+		.pipe(dest(path.app.js));
 }		
 
 // image
@@ -135,7 +143,8 @@ function clean() {
 function buildcopy() {
 	return src([
 		path.source.css,
-		path.source.fonts
+		path.source.fonts,
+		source + '/js/*.min.js'
 		], { base: source }) 
 	.pipe(dest(prod))
 }
@@ -143,12 +152,13 @@ function buildcopy() {
 // watch
 function watchFiles() {
 	gulp.watch([path.watch.scss], css);
+	gulp.watch([path.watch.js], js);
 	gulp.watch(path.watch.js).on('change', browserSync.reload);
 	gulp.watch(path.watch.html).on('change', browserSync.reload);
 }
 
-let fin = gulp.series(clean, gulp.parallel(buildcopy, image, js, html)); //build
-let watch = gulp.parallel(css, watchFiles, webserver) // watch (add jsLibs)
+let fin = gulp.series(clean, gulp.parallel(buildcopy, image, html)); //build
+let watch = gulp.parallel(css, js, jsLibs, watchFiles, webserver) // watch (add jsLibs)
 
 exports.html = html;
 exports.css = css;
@@ -160,3 +170,4 @@ exports.watch = watch;
 exports.default = watch;
 exports.buildcopy = buildcopy;
 exports.fin = fin;
+exports.jsLibs = jsLibs;
