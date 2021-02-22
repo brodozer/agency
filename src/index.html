@@ -8,6 +8,7 @@
 		<title>Agency</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<!-- Подключаем CSS -->
+		<!-- <link rel="stylesheet" href="css/libs.css" /> -->
 		<link rel="stylesheet" href="css/style.css" />
 		<!-- Кодировка страницы -->
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
@@ -18,11 +19,11 @@
 			<header class="header">
 				<div class="overlay">
 					<div class="header-top container-fluid">
-						<div class="row">
-							<div class="header-top_logo col-lg-2 col-md-3 col-5">
+						<div class="row justify-content-between">
+							<div class="header-top_logo col-lg-2 col-md-4 col-5">
 								<h2 class="header-top_logo__name">Agency</h2>
 							</div>
-							<nav class="header-top_menu col justify-content-end">
+							<nav class="header-top_menu col d-xl-flex d-none justify-content-center">
 								<ul>
 									<li class="menu_item">
 										<a href="#" class="menu_item__link">home</a>
@@ -47,18 +48,24 @@
 									</li>
 								</ul>
 							</nav>
-							<div class="header-top_social col-5 col-lg-2 col-md-3 col-sm-4">
-								<a href="#" class="social_item__search"></a>
-								<a href="#" class="social_item__facebook"></a>
-								<div class="header_menu__button">
-									<span></span>
-								</div>
+							<div class="header-top_social col-5 col-xl-3 col-md-8 col-sm-4">
+								<form action="">
+									<div class="wrapper">
+										<input type="text" placeholder="Search" class="form_input">
+										<button type="submit" class="form_btn">
+											<i class="fas fa-search"></i>
+										</button>
+									</div>
+								</form>
+								<a href="#" class="social_item__search search_btn btn-popup d-md-none fas fa-search" data-path="search"></a>
+								<a href="#" class="social_item__facebook fab fa-facebook-f"></a>
+								<a href="#" class="header_menu__button menu__btn btn-popup fas fa-bars" data-path="menu"></a>
 							</div>		
 						</div>
 					</div>
 					<div class="header-body container d-flex">
-						<img class="header-img" src="img/Model Image.png" alt="scater">
 						<div class="row flex-column col-12 col-lg-8 col-md-10">
+							<img class="header-img" src="img/Model Image.png" alt="scater">
 							<div class="header-body_title">
 								<h1 class="main-title">think outside <br> 
 									<span>of the box</span>
@@ -76,7 +83,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-5">
-							   <div class="content">
+							   <div class="content hidden">
 							   	<h2>Who we are</h2>
 									<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
 							      <div class="body_btn">
@@ -167,7 +174,7 @@
 							</div>
 						</div>
 						<div class="row flex-lg-nowrap">
-							<div class="col-lg-4 how__content">
+							<div class="col-lg-4 content hidden">
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 								<div class="body_btn">
 									<a href="#" class="btn btn-red">read more</a>	
@@ -365,13 +372,13 @@
 						</div>
 						<div class="row justify-content-center">
 							<div class="col-lg-8 social">
-								<i class="fab fa-facebook-f"></i>
-								<i class="fab fa-google-plus-g"></i>
-								<i class="fab fa-vk"></i>
-								<i class="fab fa-youtube"></i>
-								<i class="fab fa-linkedin-in"></i>
-								<i class="fab fa-digg"></i>
-								<i class="fab fa-deviantart"></i>
+								<a href="#" target="_blank" class="fab fa-facebook-f"></a>
+								<a href="#" target="_blank" class="fab fa-google-plus-g"></a>
+								<a href="#" target="_blank" class="fab fa-vk"></a>
+								<a href="#" target="_blank" class="fab fa-youtube"></a>
+								<a href="#" target="_blank" class="fab fa-linkedin-in"></a>
+								<a href="#" target="_blank" class="fab fa-digg"></a>
+								<a href="#" target="_blank" class="fab fa-deviantart"></a>
 							</div>
 						</div>
 						<div class="row">
@@ -386,7 +393,20 @@
 				</div>
 			</footer>
 		</div>
-		<div class="popup-menu">
+		<div class="popup-search" data-target="search" data-class="popup-search__toggle">
+			<form action="">
+				<div class="wrapper">
+					<input type="text" placeholder="Search" class="form_input">
+					<button type="submit" class="form_btn">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+			</form>
+			<a href="#" class="close search_btn btn-popup" data-path="search">
+				<i class="fas fa-chevron-up"></i>
+			</a>
+		</div>
+		<div class="popup-menu" data-target="menu" data-class="popup-menu__toggle">
 			<nav class="header-top_menu">
 				<ul>
 					<li class="menu_item">
@@ -412,14 +432,9 @@
 					</li>
 				</ul>
 			</nav>
-		</div>
+			<a href="#" class="close menu__btn btn-popup fas fa-times" data-path="menu"></a>
+		</div> 
 		<script src="js/libs.min.js"></script>
 		<script src="js/main.min.js"></script>
-	<!-- <script
-  			src="https://code.jquery.com/jquery-3.5.1.js"
-  			integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  			crossorigin="anonymous">			
-  	</script> -->	
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> -->
 	</body>
 </html>

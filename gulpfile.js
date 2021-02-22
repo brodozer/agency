@@ -7,8 +7,8 @@ const cleanCss = require('gulp-clean-css');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
-//const uglify = require('gulp-uglify-es').default;
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
+//const uglify = require('gulp-uglify');
 const del = require('del');
 const rename = require('gulp-rename');
 const htmlmin = require('gulp-htmlmin');
@@ -45,7 +45,7 @@ let path = {
 	source: {
 		html:  source + '/*.html',
 		js:    source + '/js/main.js',
-		scss:  source + '/scss/style.scss',
+		scss:  source + '/scss/*.scss',
 		css:   source + '/css/*.css',
 		img:   source + '/img/**/*.*',
 		fonts: source + '/fonts/**/*.*'
@@ -53,7 +53,7 @@ let path = {
 
 	watch: {
 		html:  source + '/**/*.html',
-      js:    source + '/js/*.js',
+      js:    source + '/js/main.js',
       scss:  source + '/scss/*.scss',
       img:   source + '/img/**/*.*',
       fonts: source + '/fonts/**/*.*'
@@ -75,7 +75,7 @@ function html() {
 // css
 function css() {
 	return src(path.source.scss)
-		.pipe(sourcemaps.init())
+		//.pipe(sourcemaps.init())
 		.pipe(sass({
         outputStyle: 'expanded',
       }).on('error', sass.logError))
@@ -85,9 +85,20 @@ function css() {
 		.pipe(cleanCss({ 
 			level: { 1: { specialComments: 0 } }
 		}))
-		.pipe(sourcemaps.write('.'))
-		.pipe(dest(path.app.css))
-		.pipe(browserSync.stream())
+		//.pipe(sourcemaps.write('.'))
+		.pipe(dest(path.prod.css))
+}
+
+// scss watch
+function scssWatch() {
+	return src(path.source.scss)
+		.pipe(sourcemaps.init())
+		.pipe(sass({
+        outputStyle: 'expanded',
+      }).on('error', sass.logError))
+      .pipe(sourcemaps.write('.'))
+      .pipe(dest(path.app.css))
+      .pipe(browserSync.stream())
 }
 
 // js
@@ -96,7 +107,7 @@ function js() {
 		.pipe(sourcemaps.init())
 		.pipe(uglify())
 		.pipe(sourcemaps.write('.'))
-		.pipe(rename(function(path) {
+		.pipe(rename(path => {
          if (!path.extname.endsWith('.map')) {
              path.basename += '.min';
          }
@@ -142,7 +153,7 @@ function clean() {
 //copy files to prod (add path.source.js)
 function buildcopy() {
 	return src([
-		path.source.css,
+		//path.source.css,
 		path.source.fonts,
 		source + '/js/*.min.js'
 		], { base: source }) 
@@ -151,14 +162,14 @@ function buildcopy() {
 
 // watch
 function watchFiles() {
-	gulp.watch([path.watch.scss], css);
+	gulp.watch([path.watch.scss], scssWatch);
 	gulp.watch([path.watch.js], js);
-	gulp.watch(path.watch.js).on('change', browserSync.reload);
+	//gulp.watch(path.watch.js).on('change', browserSync.reload);
 	gulp.watch(path.watch.html).on('change', browserSync.reload);
 }
 
-let fin = gulp.series(clean, gulp.parallel(buildcopy, image, html)); //build
-let watch = gulp.parallel(css, js, jsLibs, watchFiles, webserver) // watch (add jsLibs)
+let fin = gulp.series(clean, gulp.parallel(buildcopy, css, image, html)); //build
+let watch = gulp.parallel(scssWatch, jsLibs, watchFiles, webserver) 
 
 exports.html = html;
 exports.css = css;
@@ -171,3 +182,4 @@ exports.default = watch;
 exports.buildcopy = buildcopy;
 exports.fin = fin;
 exports.jsLibs = jsLibs;
+exports.scssWatch = scssWatch;
